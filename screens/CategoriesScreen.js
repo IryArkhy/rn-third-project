@@ -1,19 +1,35 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import { CATEGORIES } from '../data/dummy-data';
 
-const CategoriesScreen = (props) => {
-  // console.log(props);
-  const handleNavigate = () => props.navigation.navigate('CategoryMeals');
+const CategoriesScreen = ({ navigation }) => {
+  const navigateToCategoryMeals = (categoryId) =>
+    // navigation.navigate({
+    //   name: 'CategoryMeals',
+    //   params: { categoryId: 'id' },
+    // });
+    navigation.navigate('CategoryMeals', { categoryId });
+  const renderGridItem = (itemData) => {
+    return (
+      <TouchableOpacity
+        onPress={navigateToCategoryMeals.bind(this, itemData.item.id)}
+        style={styles.gridItem}
+      >
+        <View>
+          <Text>{itemData.item.title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
   return (
     <View style={styles.screen}>
-      <Text>Categories Screen</Text>
-      <Button title="Go to Meals Screen" onPress={handleNavigate} />
-      {/* Use this on authentication for example,
-      when you whant to replace current screen with a new one, and there will not be go back option */}
-      <Button
-        title="Replace Screen"
-        onPress={() => props.navigation.replace('CategoryMeals')}
-      />
+      <FlatList numColumns={2} data={CATEGORIES} renderItem={renderGridItem} />
     </View>
   );
 };
@@ -22,7 +38,11 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+  },
+  gridItem: {
+    flex: 1,
+    margin: 15,
+    height: 150,
   },
 });
 
