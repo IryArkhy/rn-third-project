@@ -10,9 +10,13 @@ const MealsStack = createStackNavigator();
 function MealsNavigator() {
   return (
     <MealsStack.Navigator initialRouteName="Categories">
-      <MealsStack.Screen name="Categories" component={CategoriesScreen} />
+      <MealsStack.Screen
+        // options={{}}
+        name="Categories"
+        component={CategoriesScreen}
+      />
       <MealsStack.Screen name="CategoryMeals" component={CategoryMealsScreen} />
-      <MealsStack.Screen name="MealDetail" component={MealDetailsScreen} />
+      <MealsStack.Screen name="MealDetails" component={MealDetailsScreen} />
     </MealsStack.Navigator>
   );
 }
