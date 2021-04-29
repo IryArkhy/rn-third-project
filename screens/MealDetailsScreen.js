@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { MEALS } from '../data/dummy-data';
 
-const MealDetailsScreen = ({ navigation }) => {
+const MealDetailsScreen = ({ navigation, route }) => {
+  const selectedMeal = MEALS.find((meal) => meal.id === route.params.mealId);
   return (
     <View style={styles.screen}>
-      <Text>Meal Details Screen</Text>
+      <Text>{selectedMeal.title}</Text>
       <Button title="Go to the first screen" onPress={navigation.popToTop} />
     </View>
   );
@@ -12,9 +14,7 @@ const MealDetailsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // flex: 1,
   },
 });
 
